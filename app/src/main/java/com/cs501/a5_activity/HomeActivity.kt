@@ -49,12 +49,14 @@ class HomeActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
     override fun onFling(
         e1: MotionEvent?,
-        p1: MotionEvent,
+        e2: MotionEvent,
         velocityX: Float,
         velocityY: Float
     ): Boolean {
-        val diffX = p1.x ?: (0f - e1?.x!!) ?: 0f
-        val diffY = e1?.y ?: (0f - p1.y) ?: 0f
+        if (e1 == null) return false
+
+        val diffX = e2.x - e1.x
+        val diffY = e2.y - e1.y
 
         if (abs(diffX) > abs(diffY)) {
             if (diffX > 0) {
@@ -65,7 +67,7 @@ class HomeActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
                 startActivity(Intent(this, WestActivity::class.java))
             }
         } else {
-            if (diffY > 0) {
+            if (diffY < 0) {
                 // Upwards
                 startActivity(Intent(this, NorthActivity::class.java))
             } else {

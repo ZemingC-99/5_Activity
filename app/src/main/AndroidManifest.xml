@@ -21,6 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".NorthActivity" />
+
+        <activity android:name=".EastActivity" />
+
+        <activity android:name=".SouthActivity" />
+
+        <activity android:name=".WestActivity" />
     </application>
 
 </manifest>

@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.cs501.a5_activity"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.cs501.a5_activity"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

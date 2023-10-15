@@ -1,3 +1,14 @@
+/**
+ * References:
+ * 1.https://stackoverflow.com/questions/48344247/how-can-i-shake-an-android-emulator-device-in-android-studio-3-0
+ * 2.https://www.geeksforgeeks.org/how-to-detect-shake-event-in-android/
+ * 3.https://stackoverflow.com/questions/49862357/how-do-i-get-the-current-time-as-a-timestamp-in-kotlin
+ * 4.https://developer.android.com/reference/android/hardware/SensorEventListener
+ * 5.https://www.callicoder.com/kotlin-abstract-classes/
+ * 6.https://stackoverflow.com/questions/9448732/shaking-wobble-view-animation-in-android
+ * 7.https://stackoverflow.com/questions/14680338/how-can-i-make-vibrate-animation-for-imageview
+ */
+
 package com.cs501.a5_activity
 
 import android.content.Context
@@ -9,6 +20,7 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.abs
 
@@ -23,6 +35,9 @@ class HomeActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     private var lastX = 0.0f
     private var lastY = 0.0f
     private var lastZ = 0.0f
+    private var lastShakeTimestamp: Long = 0
+    private val shakeCooldown = 3000
+    private var toastShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +119,17 @@ class HomeActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     }
 
     private fun shakeImage() {
-        // Apply a shake animation to your ImageView here, this will last for 2 seconds
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastShakeTimestamp > shakeCooldown) {
+            toastShown = false
+        }
+        if (!toastShown) {
+            Toast.makeText(this, "Please shack in each activity", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Not Here !!", Toast.LENGTH_SHORT).show()
+            toastShown = true
+        }
+
+        lastShakeTimestamp = currentTime
     }
 
     override fun onDown(p0: MotionEvent): Boolean = false

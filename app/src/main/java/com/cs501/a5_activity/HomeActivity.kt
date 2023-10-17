@@ -124,7 +124,7 @@ class HomeActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
             toastShown = false
         }
         if (!toastShown) {
-            Toast.makeText(this, "Please shack in each activity", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please shake in each activity", Toast.LENGTH_SHORT).show()
             Toast.makeText(this, "Not Here !!", Toast.LENGTH_SHORT).show()
             toastShown = true
         }

@@ -73,17 +73,27 @@ class EastActivity : AppCompatActivity() {
 
     private fun shakeImage() {
         val currentTime = System.currentTimeMillis()
+
         if (currentTime - lastShakeTimestamp > shakeCooldown) {
             toastShown = false
         }
+
         if (!toastShown) {
-            Toast.makeText(this, "Ohhhh, it's shaking!!!!", Toast.LENGTH_SHORT).show()
+            showToast("Ohhhh, it's shaking!!!!")
             toastShown = true
         }
 
         lastShakeTimestamp = currentTime
 
-        val shake: Animation = AnimationUtils.loadAnimation(this, R.anim.shake_animation)
-        findViewById<ImageView>(R.id.activityImage).startAnimation(shake)
+        animateImage(R.id.activityImage, R.anim.shake_animation)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun animateImage(viewId: Int, animationId: Int) {
+        val shake: Animation = AnimationUtils.loadAnimation(this, animationId)
+        findViewById<ImageView>(viewId).startAnimation(shake)
     }
 }
